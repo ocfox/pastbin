@@ -1,0 +1,9 @@
+name = "pastbin"
+compatibility_date = "2024-07-28"
+
+[[kv_namespaces]]
+binding = "PASTBIN"
+id = "94d91e7248584d21b595af6073474b17"
+
+[vars]
+SERVER = "https://pastb.in/"
