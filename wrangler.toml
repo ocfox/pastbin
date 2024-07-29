@@ -5,5 +5,12 @@ compatibility_date = "2024-07-28"
 binding = "PASTBIN"
 id = "94d91e7248584d21b595af6073474b17"
 
+[[routes]]
+pattern = "pastb.in"
+custom_domain = true
+
+[placement]
+mode = "smart"
+
 [vars]
 SERVER = "https://pastb.in/"
