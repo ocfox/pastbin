@@ -24,6 +24,10 @@ export async function post(
     return ctx.newResponse("Content not found", { status: 400 });
   }
 
+  if (content.length > 1024 * 1024 * 15) {
+    return ctx.newResponse("Content is too large", { status: 400 });
+  }
+
   if (content.length > 1024 * 1024 * 0.99) {
     await ctx.env.DB.prepare(
       "INSERT OR REPLACE INTO pastbin (key, content) VALUES (?, ?)"

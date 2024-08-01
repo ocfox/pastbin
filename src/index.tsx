@@ -2,12 +2,17 @@ import { Hono } from "hono";
 import { Bindings } from "./bindings";
 import { post, get, del, put } from "./option";
 import { createTable } from "./db";
+import Page from "./page";
 
 export const app = new Hono<{ Bindings: Bindings }>();
 
 app.get("/", async (ctx) => {
-  createTable(ctx.env.DB);
-  return ctx.newResponse(ctx.req.header("User-Agent") || "");
+  return ctx.html(Page(ctx.env.SERVER));
+});
+
+app.get("/~create", async (ctx) => {
+  await createTable(ctx.env.DB);
+  return ctx.newResponse("Table created");
 });
 
 app.post("/", async (ctx) => {
