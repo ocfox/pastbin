@@ -20,4 +20,6 @@ mode = "smart"
 [vars]
 SERVER = "https://pastb.in/"
 
+FAVICON = "https://ocfox.me/favicon.ico"
+
 KEY_LENGTH = 4

@@ -17,7 +17,7 @@ app.get("/~create", async (ctx) => {
 });
 
 app.get("favicon.ico", async (ctx) => {
-  const favicon = await fetch("https://ocfox.me/favicon.ico");
+  const favicon = await fetch(ctx.env.FAVICON);
   return ctx.newResponse(await favicon.arrayBuffer(), {
     headers: { "Content-Type": "image/x-icon" },
   });
@@ -35,7 +35,7 @@ app.get("/:key", async (ctx) => {
   return await get(ctx);
 });
 
-app.get("/:key/:password", async (ctx) => {
+app.get("/:key/del", async (ctx) => {
   return await del(ctx);
 });
 
