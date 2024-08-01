@@ -15,6 +15,13 @@ app.get("/~create", async (ctx) => {
   return ctx.newResponse("Table created");
 });
 
+app.get("favicon.ico", async (ctx) => {
+  const favicon = await fetch("https://ocfox.me/favicon.ico");
+  return ctx.newResponse(await favicon.arrayBuffer(), {
+    headers: { "Content-Type": "image/x-icon" },
+  });
+});
+
 app.post("/", async (ctx) => {
   return await post(ctx);
 });
