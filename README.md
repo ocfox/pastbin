@@ -16,10 +16,10 @@ D1 and R2 has more and more and more request limit than KV.
 
 ### Features
 
-- [x] Code highlight
-- [x] Image/Video/Audio in browser
+- [x] Code highlight (https://pastb.in/t1no.hs)
+- [x] Image/Video/Audio in browser (https://pastb.in/heisenberg)
 - [x] Custom URL (`echo "why" | curl -F "c=@-" pastb.in/how`)
-- [x] Random base36 key (e.g. `https://pastb.in/t1no)
+- [x] Random base36 key (e.g. https://pastb.in/t1no)
 - [x] Delete paste based IP (same ip dont need other password)
 - [ ] File upload front-end
 
