@@ -18,7 +18,7 @@ D1 and R2 has more and more and more request limit than KV.
 
 - [x] Code highlight
 - [x] Image/Video/Audio in browser
-- [x] Custom URL
+- [x] Custom URL (`echo "why" | curl -F "c=@-" pastb.in/how`)
 - [x] Random base36 key (e.g. `https://pastb.in/t1no)
 - [x] Delete paste based IP (same ip dont need other password)
 - [ ] File upload front-end
@@ -33,4 +33,9 @@ echo "Ciallo～(∠・ω< )" | curl -F "c=@-" pastb.in
 - Create a new paste from file
 ```bash
 curl -F "c=@example.zip" pastb.in
+```
+
+- Delete a paste
+```bash
+curl pastb.in/xxxx/del
 ```
