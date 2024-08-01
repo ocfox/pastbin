@@ -21,6 +21,7 @@ D1 and R2 has more and more and more request limit than KV.
 - [x] Custom URL (`echo "why" | curl -F "c=@-" pastb.in/how`)
 - [x] Random base36 key (e.g. https://pastb.in/t1no)
 - [x] Delete paste based IP (same ip dont need other password)
+- [x] Only one dependency (hono) 
 - [ ] File upload front-end
 
 ### Usage
@@ -38,4 +39,17 @@ curl -F "c=@example.zip" pastb.in
 - Delete a paste
 ```bash
 curl pastb.in/xxxx/del
+```
+
+### Deploy
+
+```bash
+git clone https://github.com/ocfox/pastbin
+```
+Edit `wrangler.toml` to your own settings.
+
+```bash
+yarn exec wrangler login
+
+yarn install && yarn run deploy
 ```
