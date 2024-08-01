@@ -25,8 +25,8 @@ export function Page(server: string) {
 }
 
 export function Highlight(content: string, lang: string) {
-  const page = html`
-    <!DOCTYPE html>
+  const language = "language-" + lang;
+  return (
     <html lang="en">
       <head>
         <title>Pastbin</title>
@@ -44,14 +44,20 @@ export function Highlight(content: string, lang: string) {
           href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css"
           rel="stylesheet"
         />
+        <Style>{css`
+          html {
+            background-color: #f5f2f0;
+          }
+        `}</Style>
       </head>
       <body class="line-numbers">
-        <pre><code class='language-${lang}'>${content}</code></pre>
+        <pre>
+          <code class={language}>{content}</code>
+        </pre>
         <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
       </body>
     </html>
-  `;
-  return page;
+  );
 }
