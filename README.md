@@ -19,3 +19,5 @@ D1 and R2 has more and more and more request limit than KV.
 - [x] Code highlight
 - [x] Image in browser
 - [x] Custom URL
+- [ ] Delete paste based IP (same ip dont need other password)
+- [ ] File upload front-end
