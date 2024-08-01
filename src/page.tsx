@@ -1,6 +1,7 @@
 import { Style, css } from "hono/css";
+import { html } from "hono/html";
 
-export default function Page(server: string) {
+export function Page(server: string) {
   const url = server.split("/")[2];
   return (
     <html>
@@ -21,4 +22,36 @@ export default function Page(server: string) {
       </body>
     </html>
   );
+}
+
+export function Highlight(content: string, lang: string) {
+  const page = html`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <title>Pastbin</title>
+        <meta charset="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta charset="utf-8" />
+        <link
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body class="line-numbers">
+        <pre><code class='language-${lang}'>${content}</code></pre>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+      </body>
+    </html>
+  `;
+  return page;
 }

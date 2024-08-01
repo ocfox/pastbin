@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { Bindings } from "./bindings";
 import { post, get, del, put } from "./option";
 import { createTable } from "./db";
-import Page from "./page";
+import { Page } from "./page";
 
 export const app = new Hono<{ Bindings: Bindings }>();
 

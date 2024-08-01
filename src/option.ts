@@ -2,6 +2,7 @@ import { Context } from "hono";
 import { Bindings } from "./bindings";
 import { generateKey, IsFormData } from "./utils";
 import { parseFormdata } from "./parse";
+import { Highlight } from "./page";
 
 export async function post(
   ctx: Context<{
@@ -53,9 +54,13 @@ export async function get(
   }>
 ) {
   let key = ctx.req.param("key");
+
+  let lang;
   if (key.includes(".")) {
+    lang = key.split(".")[1];
     key = key.split(".")[0];
   }
+
   type D1Data = {
     key: string;
     content: Uint8Array | string;
@@ -81,6 +86,12 @@ export async function get(
   }
 
   const content = new Uint8Array(data.content);
+
+  const imageFormats = ["png", "jpg", "jpeg", "gif", "webp", "bmp", "ico"];
+
+  if (lang && !imageFormats.includes(lang)) {
+    return ctx.html(Highlight(new TextDecoder().decode(content), lang));
+  }
 
   return ctx.newResponse(content);
 }
