@@ -15,6 +15,9 @@ export function Page(server: string) {
       <body>
         <h1>Pastbin</h1>
         <p>Simple pastebin app built with Hono work on cloudflare worker!</p>
+        <p>
+          Source: <a href="https://github.com/ocfox/pastbin">ocfox/pastbin</a>
+        </p>
         <p>Usage:</p>
         <pre>cmd | curl -F "c=@-" {url}</pre>
         <pre>dmesg | curl -F "c=@-" {url}</pre>
