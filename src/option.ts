@@ -4,6 +4,16 @@ import { generateKey, IsFormData } from "./utils";
 import { parseFormdata } from "./parse";
 import { Highlight } from "./page";
 
+type Metadata = {
+  ip: string;
+};
+
+type D1Data = {
+  key: string;
+  content: Uint8Array | string;
+  metadata: Metadata | string;
+};
+
 export async function post(
   ctx: Context<{
     Bindings: Bindings;
@@ -16,11 +26,11 @@ export async function post(
   }
   const boundary = ctx.req.header("Content-Type")?.split("boundary=")[1] || "";
   const uint8Array = new Uint8Array(await ctx.req.arrayBuffer());
-
   const form = parseFormdata(uint8Array, boundary);
-
   const key = ctx.req.param("key") || generateKey(ctx.env.KEY_LENGTH);
   const content = form.get("c")?.content;
+  const ip = ctx.req.header("CF-Connecting-IP");
+
   if (!content) {
     return ctx.newResponse("Content not found", { status: 400 });
   }
@@ -31,17 +41,17 @@ export async function post(
 
   if (content.length > 1024 * 1024 * 0.99) {
     await ctx.env.DB.prepare(
-      "INSERT OR REPLACE INTO pastbin (key, content) VALUES (?, ?)"
+      "INSERT OR REPLACE INTO pastbin (key, content, metadata) VALUES (?, ?, ?)"
     )
-      .bind(key, "$STORAGE_IN_R2")
+      .bind(key, "$STORAGE_IN_R2", JSON.stringify({ ip }))
       .run();
 
     await ctx.env.R2.put(key, content);
   } else {
     await ctx.env.DB.prepare(
-      "INSERT OR REPLACE INTO pastbin (key, content) VALUES (?, ?)"
+      "INSERT OR REPLACE INTO pastbin (key, content, metadata) VALUES (?, ?, ?)"
     )
-      .bind(key, content)
+      .bind(key, content, JSON.stringify({ ip }))
       .run();
   }
 
@@ -61,10 +71,6 @@ export async function get(
     key = key.split(".")[0];
   }
 
-  type D1Data = {
-    key: string;
-    content: Uint8Array | string;
-  };
   const data = await ctx.env.DB.prepare("SELECT * FROM pastbin WHERE key = ?")
     .bind(key)
     .first<D1Data>();
@@ -101,7 +107,27 @@ export async function del(
     Bindings: Bindings;
   }>
 ) {
-  return ctx.newResponse("Hello, World!");
+  const key = ctx.req.param("key");
+  const data = await ctx.env.DB.prepare("SELECT * FROM pastbin WHERE key = ?")
+    .bind(key)
+    .first<D1Data>();
+
+  if (!data) {
+    return ctx.newResponse("Not found", { status: 404 });
+  }
+  const metadata = JSON.parse(data.metadata?.toString() || "{}");
+
+  if (metadata.ip !== ctx.req.header("CF-Connecting-IP")) {
+    return ctx.newResponse("Unauthorized", { status: 401 });
+  }
+
+  if (data.content === "$STORAGE_IN_R2") {
+    await ctx.env.R2.delete(key);
+  }
+
+  await ctx.env.DB.prepare("DELETE FROM pastbin WHERE key = ?").bind(key).run();
+
+  return ctx.newResponse("Deleted");
 }
 
 export async function put(

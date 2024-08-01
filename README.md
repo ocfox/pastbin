@@ -20,7 +20,7 @@ D1 and R2 has more and more and more request limit than KV.
 - [x] Image/Video/Audio in browser
 - [x] Custom URL
 - [x] Random base36 key (e.g. `https://pastb.in/t1no)
-- [ ] Delete paste based IP (same ip dont need other password)
+- [x] Delete paste based IP (same ip dont need other password)
 - [ ] File upload front-end
 
 ### Usage
