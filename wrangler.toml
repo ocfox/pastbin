@@ -1,9 +1,14 @@
 name = "pastbin"
 compatibility_date = "2024-07-28"
 
-[[kv_namespaces]]
-binding = "PASTBIN"
-id = "94d91e7248584d21b595af6073474b17"
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "pastbin"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pastbin"
+database_id = "20a85d1c-2a20-4e32-bc4c-4856a4f115f5"
 
 [[routes]]
 pattern = "pastb.in"
@@ -14,3 +19,5 @@ mode = "smart"
 
 [vars]
 SERVER = "https://pastb.in/"
+
+KEY_LENGTH = 4

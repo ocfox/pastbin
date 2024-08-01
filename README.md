@@ -2,4 +2,4 @@
 
 Simple pastebin app built with Hono work on cloudflare worker!
 
-*Only 100 lines of code!*
+Use D1 and R2, things size over 1MB storage in R2 bucket.
