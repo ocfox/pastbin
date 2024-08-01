@@ -44,7 +44,7 @@ export async function post(
       .run();
   }
 
-  return ctx.newResponse(ctx.env.SERVER + key);
+  return ctx.newResponse(ctx.env.SERVER + key + "\n");
 }
 
 export async function get(
