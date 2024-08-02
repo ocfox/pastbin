@@ -92,14 +92,14 @@ export async function get(
   }
 
   const content = new Uint8Array(data.content);
-
   const imageFormats = ["png", "jpg", "jpeg", "gif", "webp", "bmp", "ico"];
 
   if (lang && !imageFormats.includes(lang)) {
     return ctx.html(Highlight(new TextDecoder().decode(content), lang));
   }
 
-  return ctx.newResponse(content);
+  const text = new TextDecoder().decode(content);
+  return ctx.newResponse(text);
 }
 
 export async function del(
