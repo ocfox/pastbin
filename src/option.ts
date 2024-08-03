@@ -65,9 +65,9 @@ export async function get(
 ) {
   let key = ctx.req.param("key");
 
-  let lang;
+  let extend;
   if (key.includes(".")) {
-    lang = key.split(".")[1];
+    extend = key.split(".")[1];
     key = key.split(".")[0];
   }
 
@@ -94,8 +94,14 @@ export async function get(
   const content = new Uint8Array(data.content);
   const imageFormats = ["png", "jpg", "jpeg", "gif", "webp", "bmp", "ico"];
 
-  if (lang && !imageFormats.includes(lang)) {
-    return ctx.html(Highlight(new TextDecoder().decode(content), lang));
+  if (extend && !imageFormats.includes(extend)) {
+    return ctx.html(Highlight(new TextDecoder().decode(content), extend));
+  }
+
+  if (extend && imageFormats.includes(extend)) {
+    return ctx.newResponse(content, {
+      headers: { "Content-Type": "image/" + extend },
+    });
   }
 
   const text = new TextDecoder().decode(content);
