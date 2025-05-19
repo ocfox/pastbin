@@ -11,14 +11,14 @@ database_name = "pastbin"
 database_id = "20a85d1c-2a20-4e32-bc4c-4856a4f115f5"
 
 [[routes]]
-pattern = "pastb.in"
+pattern = "pb.ocfox.me"
 custom_domain = true
 
 [placement]
 mode = "smart"
 
 [vars]
-SERVER = "https://pastb.in/"
+SERVER = "https://pb.ocfox.me/"
 
 FAVICON = "https://ocfox.me/favicon.ico"
 
