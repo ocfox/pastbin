@@ -16,10 +16,10 @@ D1 and R2 has more and more and more request limit than KV.
 
 ### Features
 
-- [x] Code highlight (https://pb.ocfox.me/t1no.hs)
-- [x] Image/Video/Audio in browser (https://pb.ocfox.me/heisenberg.png)
-- [x] Custom URL (`echo "why" | curl -F "c=@-" pb.ocfox.me/how`)
-- [x] Random base36 key (e.g. https://pb.ocfox.me/t1no)
+- [x] Code highlight (https://kuu.cat/t1no.hs)
+- [x] Image/Video/Audio in browser (https://kuu.cat/heisenberg.png)
+- [x] Custom URL (`echo "why" | curl -F "c=@-" kuu.cat/how`)
+- [x] Random base36 key (e.g. https://kuu.cat/t1no)
 - [x] Delete paste based IP (same ip dont need other password)
 - [x] Only one dependency (hono) 
 - [ ] File upload front-end
@@ -28,17 +28,17 @@ D1 and R2 has more and more and more request limit than KV.
 
 - Create a new paste from pipe
 ```bash
-echo "Ciallo～(∠・ω< )" | curl -F "c=@-" pb.ocfox.me
+echo "Ciallo～(∠・ω< )" | curl -F "c=@-" kuu.cat
 ```
 
 - Create a new paste from file
 ```bash
-curl -F "c=@example.zip" pb.ocfox.me
+curl -F "c=@example.zip" kuu.cat
 ```
 
 - Delete a paste
 ```bash
-curl pb.ocfox.me/xxxx/del
+curl kuu.cat/xxxx/del
 ```
 
 ### Deploy
