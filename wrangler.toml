@@ -18,7 +18,7 @@ custom_domain = true
 mode = "smart"
 
 [vars]
-SERVER = "https://kuu.cat/"
+SERVER = "http://kuu.cat/"
 
 FAVICON = "https://ocfox.me/favicon.ico"
 

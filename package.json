@@ -2,8 +2,8 @@
   "name": "pastbin",
   "license": "MIT",
   "scripts": {
-    "dev": "wrangler dev src/index.tsx",
-    "deploy": "wrangler deploy --minify src/index.tsx"
+    "dev": "npx wrangler dev src/index.tsx",
+    "deploy": "npx wrangler deploy --minify src/index.tsx"
   },
   "dependencies": {
     "hono": "^4.5.2"
@@ -11,5 +11,6 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240529.0",
     "wrangler": "^3.57.2"
-  }
+  },
+  "packageManager": "pnpm@10.13.1"
 }
